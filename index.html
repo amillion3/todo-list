@@ -7,16 +7,21 @@
   <title>To-do List</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
   <div class ="container-fluid">
     <div class = "col-sm">
-      <button class = "btn btn-primary" onclick="handlers.addTodo()">Add</button>
-      <input id="addTodoTextInput" type="text">
       <h1 class="">Things to Do</h1>
-      <ul>
+      <ul class = "list-group">
       </ul>
-      <button class = "btn btn-primary" onclick="handlers.toggleAll()">Toggle All</button>
+      <div class = "buttonPadding">
+        <button class = "btn btn-primary" onclick="handlers.addTodo()">Add</button>
+        <input id="addTodoTextInput" type="text">
+      </div>
+      <div class = "buttonPadding">
+        <button class = "btn btn-primary" onclick="handlers.toggleAll()">Toggle All</button>
+      </div>
     </div>
   </div>
 

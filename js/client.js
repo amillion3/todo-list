@@ -75,6 +75,7 @@ var view = {
 
     todoList.todos.forEach(function(todo, position){
       var todoLi = document.createElement('li');
+      todoLi.className = 'list-group-item listItems';
       var todoTextWithCompletion = '';
 
       if (todo.completed === true) {
@@ -93,8 +94,7 @@ var view = {
   createDeleteButton: function() {
     var deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
-    deleteButton.className = 'deleteButton';
-    //do something
+    deleteButton.className = 'deleteButton btn btn-sm btn-danger';
     return deleteButton;
   },
   setupEventListeners: function() {
