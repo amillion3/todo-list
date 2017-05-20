@@ -12,10 +12,14 @@ var todoList = {
   deleteTodo: function(position) {
     this.todos.splice(position, 1);
   },
+
+
   toggleCompleted: function(position) {
     var todo = this.todos[position];
     todo.completed = !todo.completed;
   },
+
+
   toggleAll: function() {
     var totalTodos = this.todos.length;
     var completedTodos = 0;
@@ -87,6 +91,7 @@ var view = {
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
+      todoLi.appendChild(this.createCheckButton());
       todosUl.appendChild(todoLi);
     }, this);
   },
@@ -97,6 +102,14 @@ var view = {
     deleteButton.className = 'deleteButton btn btn-sm btn-danger';
     return deleteButton;
   },
+  createCheckButton: function() {
+    var todoLiCheckBox = document.createElement('input');
+    todoLiCheckBox.type = 'checkbox';
+    todoLiCheckBox.className = 'css-checkbox';
+    //need a label? it's putting it in the DOM now at least...
+    //need a position?
+    return todoLiCheckBox;
+  },
   setupEventListeners: function() {
     var todosUl = document.querySelector('ul');
 
@@ -104,7 +117,7 @@ var view = {
       //get the element that was clicked on
       var elementClicked = event.target;
       //check if element clicked is a delete button
-      if(elementClicked.className === 'deleteButton'){
+      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger'){
       handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
     }
 });
