@@ -6,6 +6,27 @@
   font-size: 24px;
 }
 
+.strikethrough {
+  font-size: 24px;
+  /*needs a color change*/
+  text-decoration: line-through !important;
+}
+
+.noStrikethrough {
+  font-size: 24px;
+  /*needs a color change*/
+  text-decoration: none;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid #ddd;
+    line-height: 1em
+}
+
 .checkbox-custom {
     opacity: 0;
     position: absolute;

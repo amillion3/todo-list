@@ -37,32 +37,29 @@ var todoList = {
   }
 };
 
-var handlers = {
+var handlers = {  //Object to handle events
   addTodo: function() {
     var addTodoTextInput = document.getElementById('addTodoTextInput');
     todoList.addTodo(addTodoTextInput.value);
     addTodoTextInput.value = '';
     view.displayTodos();
   },
-  changeTodo: function() {
-    var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
-    var changeTodoTextInput = document.getElementById('changeTodoTextInput');
-    todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
-    changeTodoPositionInput.value = '';
-    changeTodoTextInput.value = '';
+  changeTodo: function(position) {  //change one 'to do' at a time
+    todoList.toggleCompleted(position);
     view.displayTodos();
+    console.log(position); //for testing purposes
   },
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
     view.displayTodos();
   },
-  toggleCompleted: function() {
+  toggleCompleted: function() {  //toggles all 'to do' items at once
     var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
     todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
     toggleCompletedPositionInput.value = '';
     view.displayTodos();
   },
-  toggleAll: function() {
+  toggleAll: function() {  //calls a function to change all 'to do' items at once
     todoList.toggleAll();
     view.displayTodos();
   }
@@ -79,21 +76,23 @@ var view = {
       var todoTextWithCompletion = '';
 
       if (todo.completed === true) {
-        todoTextWithCompletion = '(x) ' + todo.todoText;
+        todoTextWithCompletion = ' ' + todo.todoText + ' ';
+        todoLi.className = 'list-group-item listItems strikethrough';
       } else {
-        todoTextWithCompletion = '( ) ' + todo.todoText;
+        todoTextWithCompletion = ' ' + todo.todoText + ' ';
+        todoLi.className = 'list-group-item listItems noStrikethrough';
       }
 
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
-      todoLi.appendChild(this.createCheckButton(position));
-      todoLi.appendChild(this.createCheckButtonLabel(position));
+      todoLi.insertBefore(this.createCheckButton(position),todoLi.childNodes[0]);
+      //todoLi.appendChild(this.createCheckButtonLabel(position));   probably delete this check box label method
       todosUl.appendChild(todoLi);
     }, this);
   },
   //event delegation
-  createDeleteButton: function() {
+  createDeleteButton: function() {  //method to create a delete button for each <li> item
     var deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.className = 'deleteButton btn btn-sm btn-danger';
@@ -101,11 +100,13 @@ var view = {
   },
   createCheckButton: function(position) {  //checkbox
     var todoLiCheckBox = document.createElement('input');
+    todoLiCheckBox.checked = false;
     todoLiCheckBox.type = 'checkbox';
     todoLiCheckBox.className = '';
     todoLiCheckBox.name = 'checkbox' + position;  // .name equals checkbox plus the position of the 'to do'
     return todoLiCheckBox;
   },
+  //i think this whole method is not necessary...
   createCheckButtonLabel: function(position) {  //label for the checkbox
     var todoLiCheckBoxLabel = document.createElement('label');
     todoLiCheckBoxLabel.htmlFor = 'checkbox' + position;  // .name equals checkbox plus the position of the 'to do'
@@ -119,9 +120,14 @@ var view = {
       //get the element that was clicked on
       var elementClicked = event.target;
       //check if element clicked is a delete button
-      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger'){
-      handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-    }
+      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger'){  //delete button clicked
+        handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+      } else if (elementClicked.type === 'checkbox') {  //checkbox clicked
+        console.log('checkbox' + (elementClicked.parentNode.id) + " " + elementClicked.checked); //for testing purposes
+        //document.getElementById('checkbox' + (elementClicked.parentNode.id)).checked = !elementClicked.checked;
+        handlers.changeTodo(parseInt(elementClicked.parentNode.id));
+      }
+
 });
   }
 };
