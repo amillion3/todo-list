@@ -77,17 +77,17 @@ var view = {
 
       if (todo.completed === true) {
         todoTextWithCompletion = ' ' + todo.todoText + ' ';
-        todoLi.className = 'list-group-item listItems strikethrough';
+        todoLi.className = 'list-group-item listItems listBackground strikethrough';
       } else {
         todoTextWithCompletion = ' ' + todo.todoText + ' ';
-        todoLi.className = 'list-group-item listItems noStrikethrough';
+        todoLi.className = 'list-group-item listItems listBackground noStrikethrough';
       }
 
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
       todoLi.insertBefore(this.createCheckButton(position),todoLi.childNodes[0]);
-      //todoLi.appendChild(this.createCheckButtonLabel(position));   probably delete this check box label method
+      todoLi.appendChild(this.createCheckButtonLabel(position));
       todosUl.appendChild(todoLi);
     }, this);
   },
@@ -98,21 +98,22 @@ var view = {
     deleteButton.className = 'deleteButton btn btn-sm btn-danger';
     return deleteButton;
   },
+
   createCheckButton: function(position) {  //checkbox
-    var todoLiCheckBox = document.createElement('input');
+    var todoLiCheckBox = document.createElement('input');  //I tried document.insertBefore('input',null) & Node, with no luck
     todoLiCheckBox.checked = false;
     todoLiCheckBox.type = 'checkbox';
     todoLiCheckBox.className = '';
     todoLiCheckBox.name = 'checkbox' + position;  // .name equals checkbox plus the position of the 'to do'
     return todoLiCheckBox;
   },
-  //i think this whole method is not necessary...
   createCheckButtonLabel: function(position) {  //label for the checkbox
     var todoLiCheckBoxLabel = document.createElement('label');
     todoLiCheckBoxLabel.htmlFor = 'checkbox' + position;  // .name equals checkbox plus the position of the 'to do'
     todoLiCheckBoxLabel.className = '';
     return todoLiCheckBoxLabel;
   },
+
   setupEventListeners: function() {
     var todosUl = document.querySelector('ul');
 
@@ -123,13 +124,14 @@ var view = {
       if(elementClicked.className === 'deleteButton btn btn-sm btn-danger'){  //delete button clicked
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       } else if (elementClicked.type === 'checkbox') {  //checkbox clicked
-        console.log('checkbox' + (elementClicked.parentNode.id) + " " + elementClicked.checked); //for testing purposes
-        //document.getElementById('checkbox' + (elementClicked.parentNode.id)).checked = !elementClicked.checked;
-        handlers.changeTodo(parseInt(elementClicked.parentNode.id));
-      }
+        //ERROR follows below
+        console.log('check this: ' + document.getElementById(elementClicked).checked);
+        //above line always returns Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)
 
-});
+        document.getElementById(elementClicked.parentNode.id).checked = !document.getElementById(elementClicked.parentNode.id).checked;
+        handlers.changeTodo(parseInt(elementClicked.parentNode.id));
+        }
+    });
   }
 };
-
 view.setupEventListeners();

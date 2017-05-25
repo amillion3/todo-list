@@ -2,8 +2,13 @@
   padding: 15px 0px 0px 0px;
 }
 
+.defaultFont {
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
 .listItems {
   font-size: 24px;
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 .strikethrough {
@@ -18,14 +23,25 @@
   text-decoration: none;
 }
 
+body {
+  background-color: #ffffff;
+}
+
+.listBackground {
+  background-color: #faf283;
+}
+
 .list-group-item {
     position: relative;
     display: block;
     padding: 10px 15px;
     margin-bottom: -1px;
-    border: 1px solid #ddd;
+    border: 1px solid #7d84e6;
     line-height: 1em
 }
+
+
+
 
 .checkbox-custom {
     opacity: 0;
