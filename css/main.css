@@ -3,23 +3,27 @@
 }
 
 .defaultFont {
-  font-family: 'Yellowtail', cursive;
+  font-family: 'Shadows Into Light Two', cursive;
   font-size: 50px;
+  margin-top: 15px;
 }
 
 .buttonFontInfo {
-  font-family: 'Yellowtail', cursive;
+  font-family: 'Shadows Into Light Two', cursive;
   font-size: 24px;
 }
 
 .buttonDeleteFontInfo {
-  font-family: 'Yellowtail', cursive;
+  font-family: 'Shadows Into Light Two', cursive;
   font-size: 16px;
 }
 
+.inputForm {
+  vertical-align: middle;
+}
+
 .listItems {
-  font-size: 90px;
-  font-family: 'Yellowtail', cursive;
+  font-family: 'Shadows Into Light Two', cursive;
 }
 
 .strikethrough {
@@ -39,26 +43,28 @@ body {
 }
 
 .listBackground {
-  background-color: #faf283;
+    background-color: #faf283;
+}
+
+.list-group {
+  margin: 10px 25px 10px 25px;
 }
 
 .list-group-item {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
-    border: 1px solid #7d84e6;
-    line-height: 1em;
-    font-size: 30px;
-    font-stretch: expanded;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #7d84e6;
+  line-height: 1em;
+  font-size: 30px;
+  font-stretch: expanded;
 }
 
 .offsetBorder{
   position: relative;
   display: inline;
-  margin-left: 30px;
   border-left: 3px solid #ff0000;
-
 }
 
 
