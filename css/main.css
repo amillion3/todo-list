@@ -3,22 +3,33 @@
 }
 
 .defaultFont {
-  font-family: Tahoma, Geneva, sans-serif;
+  font-family: 'Yellowtail', cursive;
+  font-size: 50px;
+}
+
+.buttonFontInfo {
+  font-family: 'Yellowtail', cursive;
+  font-size: 24px;
+}
+
+.buttonDeleteFontInfo {
+  font-family: 'Yellowtail', cursive;
+  font-size: 16px;
 }
 
 .listItems {
-  font-size: 24px;
-  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 90px;
+  font-family: 'Yellowtail', cursive;
 }
 
 .strikethrough {
-  font-size: 24px;
+  font-size: 30px;
   /*needs a color change*/
   text-decoration: line-through !important;
 }
 
 .noStrikethrough {
-  font-size: 24px;
+  font-size: 30px;
   /*needs a color change*/
   text-decoration: none;
 }
@@ -37,10 +48,18 @@ body {
     padding: 10px 15px;
     margin-bottom: -1px;
     border: 1px solid #7d84e6;
-    line-height: 1em
+    line-height: 1em;
+    font-size: 30px;
+    font-stretch: expanded;
 }
 
+.offsetBorder{
+  position: relative;
+  display: inline;
+  margin-left: 30px;
+  border-left: 3px solid #ff0000;
 
+}
 
 
 .checkbox-custom {

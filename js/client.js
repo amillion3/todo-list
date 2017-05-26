@@ -77,10 +77,10 @@ var view = {
 
       if (todo.completed === true) {
         todoTextWithCompletion = ' ' + todo.todoText + ' ';
-        todoLi.className = 'list-group-item listItems listBackground strikethrough';
+        todoLi.className = 'list-group-item listItems listBackground offsetBorder strikethrough';
       } else {
         todoTextWithCompletion = ' ' + todo.todoText + ' ';
-        todoLi.className = 'list-group-item listItems listBackground noStrikethrough';
+        todoLi.className = 'list-group-item listItems listBackground offsetBorder noStrikethrough';
       }
 
       todoLi.id = position;
@@ -95,7 +95,7 @@ var view = {
   createDeleteButton: function() {  //method to create a delete button for each <li> item
     var deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
-    deleteButton.className = 'deleteButton btn btn-sm btn-danger';
+    deleteButton.className = 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo';
     return deleteButton;
   },
 
@@ -121,7 +121,7 @@ var view = {
       //get the element that was clicked on
       var elementClicked = event.target;
       //check if element clicked is a delete button
-      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger'){  //delete button clicked
+      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo'){  //delete button clicked
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       } else if (elementClicked.type === 'checkbox') {  //checkbox clicked
         //ERROR follows below
