@@ -76,10 +76,10 @@ var view = {
       var todoTextWithCompletion = '';
 
       if (todo.completed === true) {
-        todoTextWithCompletion = ' ' + todo.todoText + ' ';
+        todoTextWithCompletion = ' ' + todo.todoText + ' ';  // Items ARE crossed off on the list
         todoLi.className = 'list-group-item listItems listBackground offsetBorder strikethrough';
       } else {
-        todoTextWithCompletion = ' ' + todo.todoText + ' ';
+        todoTextWithCompletion = ' ' + todo.todoText + ' ';  // Items are NOT crossed off on the list
         todoLi.className = 'list-group-item listItems listBackground offsetBorder noStrikethrough';
       }
 
@@ -120,15 +120,19 @@ var view = {
     todosUl.addEventListener('click', function(event) {
       //get the element that was clicked on
       var elementClicked = event.target;
+      debugger;
+      console.log("This type of element was clicked: " + elementClicked);
       //check if element clicked is a delete button
-      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo'){  //delete button clicked
+      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo'){  //delete button clicked, seems super clunky though. refactor?
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       } else if (elementClicked.type === 'checkbox') {  //checkbox clicked
         //ERROR follows below
-        console.log('check this: ' + document.getElementById(elementClicked).checked);
-        //above line always returns Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)
+        console.log('check this: ' + document.getElementById(elementClicked).checked); //This throws an error and won't run the changeTodo method
+        //above line always returns "Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)"
+        //console.log('check this: ' + document.getElementById(elementClicked));  //This does not throw an error, but the checkbox won't Check/Uncheck, ever.
+        //above line always returns "Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)"
 
-        document.getElementById(elementClicked.parentNode.id).checked = !document.getElementById(elementClicked.parentNode.id).checked;
+        document.getElementById(elementClicked.parentNode.id).checked = !document.getElementById(elementClicked.parentNode.id).checked;  //switches checkbox to the opposite upon click
         handlers.changeTodo(parseInt(elementClicked.parentNode.id));
         }
     });
