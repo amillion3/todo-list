@@ -47,7 +47,7 @@ var handlers = {  //Object to handle events
   changeTodo: function(position) {  //change one 'to do' at a time
     todoList.toggleCompleted(position);
     view.displayTodos();
-    console.log(position); //for testing purposes
+    console.log('checkbox #' + position + ' clicked.'); //FOR TESTING PURPOSES
   },
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
@@ -116,23 +116,14 @@ var view = {
 
   setupEventListeners: function() {
     var todosUl = document.querySelector('ul');
-
     todosUl.addEventListener('click', function(event) {
       //get the element that was clicked on
       var elementClicked = event.target;
-      debugger;
-      console.log("This type of element was clicked: " + elementClicked);
+      //debugger;
       //check if element clicked is a delete button
-      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo'){  //delete button clicked, seems super clunky though. refactor?
+      if(elementClicked.className === 'deleteButton btn btn-sm btn-danger buttonDeleteFontInfo'){  //DELETE button clicked, seems super clunky though. refactor?
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-      } else if (elementClicked.type === 'checkbox') {  //checkbox clicked
-        //ERROR follows below
-        console.log('check this: ' + document.getElementById(elementClicked).checked); //This throws an error and won't run the changeTodo method
-        //above line always returns "Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)"
-        //console.log('check this: ' + document.getElementById(elementClicked));  //This does not throw an error, but the checkbox won't Check/Uncheck, ever.
-        //above line always returns "Uncaught TypeError: Cannot read property 'checked' of null at HTMLUListElement.<anonymous> (client.js:128)"
-
-        document.getElementById(elementClicked.parentNode.id).checked = !document.getElementById(elementClicked.parentNode.id).checked;  //switches checkbox to the opposite upon click
+      } else if (elementClicked.type === 'checkbox') {  //CHECKBOX clicked
         handlers.changeTodo(parseInt(elementClicked.parentNode.id));
         }
     });
